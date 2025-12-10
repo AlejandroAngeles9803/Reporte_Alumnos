@@ -36,6 +36,7 @@ cmds = [
 [start]
 cmd = """
 php artisan key:generate --force || true
+php artisan session:table || true
 php artisan migrate --force || true
 php-fpm -D
 nginx -c /app/.nixpacks/nginx.conf -g 'daemon off;'
