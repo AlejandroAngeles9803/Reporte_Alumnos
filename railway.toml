@@ -2,25 +2,23 @@
 builder = "nixpacks"
 
 [variables]
-APP_ENV="production"
-APP_DEBUG="false"
-PORT="8080"
+PORT = "8080"
+APP_ENV = "production"
+APP_DEBUG = "false"
 
 [phases.setup]
 nixPkgs = [
-  "php",
+  "php81",
   "php81Extensions.pdo_mysql",
   "php81Extensions.mbstring",
   "php81Extensions.curl",
-  "php81Extensions.exif",
   "php81Extensions.fileinfo",
-  "php81Extensions.openssl",
-  "php81Extensions.dom",
   "php81Extensions.tokenizer",
+  "php81Extensions.openssl",
   "nginx",
-  "phpPackages.composer",
   "nodejs_18",
-  "npm-9_x"
+  "npm-9_x",
+  "phpPackages.composer"
 ]
 
 [phases.install]
@@ -36,4 +34,4 @@ cmds = [
 ]
 
 [start]
-cmd = "php-fpm8.1 -D && nginx -g 'daemon off;'"
+cmd = "php-fpm -D && nginx -c /app/.nixpacks/nginx.conf -g 'daemon off;'"
